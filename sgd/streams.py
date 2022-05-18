@@ -66,7 +66,7 @@ class Streams:
         self.constructed["behaviorHints"] = {
                 "notWebReady": "true",
                 "proxyHeaders": {
-                    "request": {"Authorization": f"Bearer {self.acc_token}", "Server": "Stremio"}
+                    "request": {"Server": "Stremio", "Authorization": f"Bearer {self.acc_token}"}
                 },
             }
         return f"https://www.googleapis.com/drive/v3/files/{file_id}?alt=media&file_name={file_name}"
