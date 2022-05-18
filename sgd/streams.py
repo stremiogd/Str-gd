@@ -63,9 +63,12 @@ class Streams:
     def get_gapi_url(self):
         file_id = self.item.get("id")
         file_name = urllib.parse.quote(self.item.get("name")) or "file_name.vid"
-        self.constructed["behaviorHints"]["proxyHeaders"] = {
-            "request": {"Authorization": f"Bearer {self.acc_token}"}
-        }
+        self.constructed["behaviorHints"] = {
+                "notWebReady": "true",
+                "proxyHeaders": {
+                    "request": {"Authorization": f"Bearer {self.acc_token}"}
+                },
+            }
         return f"https://www.googleapis.com/drive/v3/files/{file_id}?alt=media&file_name={file_name}"
 
     def construct_stream(self):
