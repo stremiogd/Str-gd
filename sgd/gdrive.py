@@ -1,4 +1,5 @@
 import requests
+import pytz
 from datetime import datetime, timedelta
 from sgd.cache import Pickle, Json
 from googleapiclient.discovery import build
@@ -140,7 +141,7 @@ class GoogleDrive:
 
     def get_acc_token(self):
         token_exipred = (
-            self.acc_token.contents.get("expires_in", datetime.now()) <= datetime.now()
+            self.acc_token.contents.get("expires_in", datetime.now(pytz.timezone("Asia/Dubai"))) <= datetime.now(pytz.timezone("Asia/Dubai"))
         )
 
         if token_exipred or not self.acc_token.contents:
@@ -153,7 +154,7 @@ class GoogleDrive:
             api_url = "https://www.googleapis.com/oauth2/v4/token"
             oauth_resp = requests.post(api_url, json=body).json()
             oauth_resp["expires_in"] = (
-                timedelta(seconds=oauth_resp["expires_in"]) + datetime.now()
+                timedelta(seconds=oauth_resp["expires_in"]) + datetime.now(pytz.timezone("Asia/Dubai"))
             )
 
             self.acc_token.contents = oauth_resp
