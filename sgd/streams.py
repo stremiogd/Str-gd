@@ -69,7 +69,7 @@ class Streams:
                     "request": {"Server": "Stremio", "Authorization": f"Bearer {self.acc_token}"}
                 },
             }
-        return f"https://www.googleapis.com/drive/v3/files/{file_id}?alt=media&file_name={file_name}"
+        return f"https://www.googleapis.com/drive/v3/files/{file_id}?alt=media"
 
     def construct_stream(self):
         self.constructed = {}
